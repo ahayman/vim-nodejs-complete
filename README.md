@@ -7,7 +7,7 @@ Support node's builtin module's method&property completion(`ctrl-x ctrl-o`) in `
 
 
 ## Install
-Download the [tarball](https://github.com/myhere/vim-nodejs-complete/zipball/master) and extract to your vimfiles(`~/.vim` or `~/vimfiles`) folder.
+Download the [tarball](https://github.com/ahayman/vim-nodejs-complete/zipball/master) and extract to your vimfiles(`~/.vim` or `~/vimfiles`) folder.
 
 Completion require `:filetype plugin on`, please make sure it's on.
 
