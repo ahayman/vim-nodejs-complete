@@ -194,7 +194,7 @@ function! s:moduleMainFromPackageJson(jsonPath)"{{{
        let directory = strpart(a:jsonPath, 0, match(a:jsonPath, '[^/\\]\+$'))
        if (filereadable(directory . json.name . '.js'))
            silent! echo 'filereadable: ' . directory . json.name . '.js'
-           let main = name . '.js'
+           let main = json.name . '.js'
        else
            let package = {'path': directory, 'json': json}
            silent! echo string(package)
