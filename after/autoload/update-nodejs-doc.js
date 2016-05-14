@@ -64,9 +64,14 @@ function clearLoading() {
 }
 
 function getNodejsDoc() {
-  var http = require('http');
+  var https = require('https');
 
-  var req = http.get('http://nodejs.org/api/all.json', function(res){
+  var req = https.get('https://nodejs.org/api/all.json', function(res){
+      if (res.statusCode !== 200) {
+          clearLoading();
+          console.error('http error occurred: ' + res.statusCode);
+          return;
+      }
       var chunks = [];
 
       res.on('data', function(chunk) {
@@ -80,6 +85,7 @@ function getNodejsDoc() {
         extract2VimScript(body);
       });
   }).on('error', function(e) {
+    clearLoading();
     console.error('problem with request: ' + e.message);
   });
 }
