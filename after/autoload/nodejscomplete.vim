@@ -90,8 +90,19 @@ function! s:getNodeComplete(base, context)"{{{
   let matched = matchlist(a:context, mod_reg)
   "Decho 'mod_reg: ' . mod_reg
 
-  " 模块属性补全
-  if len(matched) > 0
+  let reqex = 'require\_s*(\_s*\([''"]\)\zs[^)''"]\+\ze\1\s*)\s*\(\.\|\[\s*["'']\?\)\s*$'
+  let reqmeth = matchlist(a:context, reqex)
+  if len(reqmeth) > 0
+    let ret = {
+          \ 'complete': s:getObjectComplete(s:js_obj_declare_type.require, reqmeth[0],
+          \ a:base, reqmeth[2])
+          \ }
+    if len(ret.complete) == 0
+      let ret.continue = 1
+    else
+      let ret.continue = 0
+    endif
+  elseif len(matched) > 0
     let var_name = matched[1]
     let operator = matched[2]
     let position = [line('.'), len(a:context) - len(matched[0])]
